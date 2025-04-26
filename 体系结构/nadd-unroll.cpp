@@ -7,32 +7,32 @@ int main() {
     cout << "Input n:";
     cin >> n;
 
-    // ÄÚ´æ·ÖÅäÓë³õÊ¼»¯
+    // å†…å­˜åˆ†é…ä¸åˆå§‹åŒ–
     int* a = new int[n];
     for (int i = 0; i < n; i++) {
         a[i] = i;
     }
 
-    // ĞÔÄÜ²âÊÔ±äÁ¿
+    // æ€§èƒ½æµ‹è¯•å˜é‡
     float seconds;
     clock_t start, finish;
     long counter = 0;
     start = clock();
 
-    // Õ¹¿ªÓÅ»¯±äÁ¿
+    // å±•å¼€ä¼˜åŒ–å˜é‡
     int sum = 0;
-    const int UNROLL_FACTOR = 8;  // 8Â·Õ¹¿ª
+    const int UNROLL_FACTOR = 8;  // 8è·¯å±•å¼€
     int partial_sums[UNROLL_FACTOR] = { 0 };
 
-    while (clock() - start < 5) {  // 5Ãë²âÊÔ´°¿Ú
+    while (clock() - start < 5) {  // 5ç§’æµ‹è¯•çª—å£
         counter++;
         sum = 0;
-        // ÖØÖÃ²¿·ÖºÍÊı×é
+        // é‡ç½®éƒ¨åˆ†å’Œæ•°ç»„
         for (int k = 0; k < UNROLL_FACTOR; k++) {
             partial_sums[k] = 0;
         }
 
-        // Ö÷Ñ­»·£¨8Â·Õ¹¿ª£©
+        // ä¸»å¾ªç¯ï¼ˆ8è·¯å±•å¼€ï¼‰
         int i = 0;
         for (; i <= n - UNROLL_FACTOR; i += UNROLL_FACTOR) {
             partial_sums[0] += a[i];
@@ -45,17 +45,17 @@ int main() {
             partial_sums[7] += a[i + 7];
         }
 
-        // ´¦ÀíÊ£ÓàÔªËØ£¨n % UNROLL_FACTOR£©
+        // å¤„ç†å‰©ä½™å…ƒç´ ï¼ˆn % UNROLL_FACTORï¼‰
         for (; i < n; i++) {
             partial_sums[0] += a[i];
         }
 
-        // ºÏ²¢²¿·ÖºÍ
+        // åˆå¹¶éƒ¨åˆ†å’Œ
         for (int k = 0; k < UNROLL_FACTOR; k++) {
             sum += partial_sums[k];
         }
 
-        // ĞÔÄÜÊä³ö
+        // æ€§èƒ½è¾“å‡º
         finish = clock();
         seconds = (finish - start) / float(CLOCKS_PER_SEC);
         cout << "Size:" << n
