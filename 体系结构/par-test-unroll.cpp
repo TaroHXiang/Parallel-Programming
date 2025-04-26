@@ -7,12 +7,12 @@ int main() {
     cout << "Input n:";
     cin >> n;
 
-    // ÄÚ´æ·ÖÅä
+    // å†…å­˜åˆ†é…
     int** matri1 = new int* [n];
     int* column_sum = new int[n];
     int* vec = new int[n];
 
-    // ³õÊ¼»¯¾ØÕóºÍÏòÁ¿
+    // åˆå§‹åŒ–çŸ©é˜µå’Œå‘é‡
     for (int i = 0; i < n; i++) {
         matri1[i] = new int[n];
         for (int j = 0; j < n; j++) {
@@ -26,10 +26,10 @@ int main() {
     long counter = 0;
     start = clock();
 
-    while (clock() - start < 10) {  // ÔËĞĞ10Ãë
+    while (clock() - start < 10) {  // è¿è¡Œ10ç§’
         counter++;
 
-        // ÇåÁãÁĞºÍÊı×é
+        // æ¸…é›¶åˆ—å’Œæ•°ç»„
         for (int i = 0; i < n; i++) {
             column_sum[i] = 0;
         }
@@ -45,7 +45,7 @@ int main() {
                 column_sum[i + 2] += mat_col[i + 2] * vec_val;
                 column_sum[i + 3] += mat_col[i + 3] * vec_val;
             }
-            // ´¦ÀíÊ£ÓàÔªËØ
+            // å¤„ç†å‰©ä½™å…ƒç´ 
             for (; i < n; i++) {
                 column_sum[i] += mat_col[i] * vec_val;
             }
@@ -59,7 +59,7 @@ int main() {
             << "Per-runtime:" << seconds / counter << endl;
     }
 
-    // ÊÍ·ÅÄÚ´æ
+    // é‡Šæ”¾å†…å­˜
     for (int i = 0; i < n; i++) {
         delete[] matri1[i];
     }
